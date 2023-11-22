@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDC Control</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .slider {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 15px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+
+        output {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Button Styles */
+        .button-container {
+            text-align: center;
+        }
+
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            background-color: #4CAF50;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>DDC Control</h1>
+    <h2>Brightness</h2>
+    <!-- slider -->
+    <input type="range" min="0" max="100" value="50" class="slider" id="brightnessSlider" oninput="updateBrightnessOutput()" onchange="setBrightness(brightnessSlider.value)">
+    <output id="brightnessOutput">50</output>
+
+    <h2>Input</h2>
+    <div class="button-container">
+        <button onclick="setInput('HDMI-1')">HDMI-1</button>
+        <button onclick="setInput('HDMI-2')">HDMI-2</button>
+    </div>
+
+    <script>
+        function setBrightness(value) {
+            let formData = new FormData();
+            formData.append("brightness", value);
+            fetch("/set_brightness", {
+                method: "POST",
+                body: formData
+            });
+        }
+
+        function setInput(value) {
+            let formData = new FormData();
+            formData.append("input", value);
+            fetch("/set_input", {
+                method: "POST",
+                body: formData
+            });
+        }
+
+        function updateBrightnessOutput() {
+            const brightnessSlider = document.getElementById("brightnessSlider");
+            const brightnessOutput = document.getElementById("brightnessOutput");
+            brightnessOutput.value = brightnessSlider.value;
+        }
+    </script>
+</body>
+</html>

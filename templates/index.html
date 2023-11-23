@@ -123,7 +123,7 @@
 
         function getBrightness() {
             fetch("/get_brightness")
-                .then(response => response.body())
+                .then(response => response.body)
                 .then(data => {
                     const brightnessSlider = document.getElementById("brightnessSlider");
                     const brightnessOutput = document.getElementById("brightnessOutput");
@@ -154,7 +154,7 @@
 
         function getContrast() {
             fetch("/get_contrast")
-                .then(response => response.body())
+                .then(response => response.body)
                 .then(data => {
                     const contrastSlider = document.getElementById("contrastSlider");
                     const contrastOutput = document.getElementById("contrastOutput");
@@ -176,7 +176,7 @@
 
         function getVolume() {
             fetch("/get_volume")
-                .then(response => response.body())
+                .then(response => response.body)
                 .then(data => {
                     const volumeSlider = document.getElementById("volumeSlider");
                     const volumeOutput = document.getElementById("volumeOutput");
@@ -204,7 +204,7 @@
 
         function getVideoColor() {
             fetch("/get_video_color_gain")
-                .then(response => response.body())
+                .then(response => response.body)
                 .then(data => {
                     const redSlider = document.getElementById("redSlider");
                     const greenSlider = document.getElementById("greenSlider");

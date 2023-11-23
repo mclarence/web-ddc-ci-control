@@ -34,6 +34,12 @@ def set_brightness():
     else:
         return "ERROR", 500
     
+@app.route("/get_brightness", methods=["GET"])
+def get_brightness():
+    brightness = monitor.get_brightness()
+
+    return brightness, 200
+    
 @app.route("/set_input", methods=["POST"])
 def set_input():
     input = request.form.get("input")

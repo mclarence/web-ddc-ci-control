@@ -121,6 +121,19 @@
             });
         }
 
+        function getBrightness() {
+            fetch("/get_brightness")
+                .then(response => response.json())
+                .then(data => {
+                    const brightnessSlider = document.getElementById("brightnessSlider");
+                    const brightnessOutput = document.getElementById("brightnessOutput");
+                    brightnessSlider.value = data.brightness;
+                    brightnessOutput.value = data.brightness;
+                });
+        }
+
+        getBrightness();
+
         function setInput(value) {
             let formData = new FormData();
             formData.append("input", value);
@@ -198,6 +211,7 @@
             const blueOutput = document.getElementById("blueOutput");
             blueOutput.value = blueSlider.value;
         }
+        
     </script>
 </body>
 </html>

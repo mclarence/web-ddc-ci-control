@@ -127,8 +127,8 @@
                 .then(data => {
                     const brightnessSlider = document.getElementById("brightnessSlider");
                     const brightnessOutput = document.getElementById("brightnessOutput");
-                    brightnessSlider.value = data.brightness;
-                    brightnessOutput.value = data.brightness;
+                    brightnessSlider.value = parseInt(data.brightness);
+                    brightnessOutput.value = parseInt(data.brightness);
                 });
         }
 

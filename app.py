@@ -80,7 +80,13 @@ def set_contrast():
         return "OK", 200
     else:
         return "ERROR", 500
-    
+
+@app.route("/get_contrast", methods=["GET"])
+def get_contrast():
+    contrast = monitor.get_contrast()
+
+    return contrast, 200
+
 @app.route("/set_volume", methods=["POST"])
 def set_volume():
     volume = request.form.get("volume")
@@ -101,6 +107,12 @@ def set_volume():
         return "OK", 200
     else:
         return "ERROR", 500
+    
+@app.route("/get_volume", methods=["GET"])
+def get_volume():
+    volume = monitor.get_volume()
+
+    return volume, 200
     
 @app.route("/set_video_color_gain", methods=["POST"])
 def set_video_color_gain():
@@ -142,6 +154,16 @@ def set_video_color_gain():
         return "OK", 200
     else:
         return "ERROR", 500
+    
+@app.route("/get_video_color_gain", methods=["GET"])
+def get_video_color_gain():
+    red = monitor.get_video_color_gain_red()
+    green = monitor.get_video_color_gain_green()
+    blue = monitor.get_video_color_gain_blue()
+
+    return red + " " + green + " " + blue, 200
+    
+
 
 if __name__ == "__main__":
     app.run(debug=True)

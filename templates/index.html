@@ -152,6 +152,19 @@
             });
         }
 
+        function getContrast() {
+            fetch("/get_contrast")
+                .then(response => response.json())
+                .then(data => {
+                    const contrastSlider = document.getElementById("contrastSlider");
+                    const contrastOutput = document.getElementById("contrastOutput");
+                    contrastSlider.value = parseInt(data);
+                    contrastOutput.value = parseInt(data);
+                });
+        }
+
+        getContrast();
+
         function setVolume(value) {
             let formData = new FormData();
             formData.append("volume", value);
@@ -160,6 +173,19 @@
                 body: formData
             });
         }
+
+        function getVolume() {
+            fetch("/get_volume")
+                .then(response => response.json())
+                .then(data => {
+                    const volumeSlider = document.getElementById("volumeSlider");
+                    const volumeOutput = document.getElementById("volumeOutput");
+                    volumeSlider.value = parseInt(data);
+                    volumeOutput.value = parseInt(data);
+                });
+        }
+
+        getVolume();
 
         function setVideoColor(value) {
             const redSlider = document.getElementById("redSlider");
@@ -175,6 +201,32 @@
                 body: formData
             });
         }
+
+        function getVideoColor() {
+            fetch("/get_video_color_gain")
+                .then(response => response.json())
+                .then(data => {
+                    const redSlider = document.getElementById("redSlider");
+                    const greenSlider = document.getElementById("greenSlider");
+                    const blueSlider = document.getElementById("blueSlider");
+
+                    const redOutput = document.getElementById("redOutput");
+                    const greenOutput = document.getElementById("greenOutput");
+                    const blueOutput = document.getElementById("blueOutput");
+
+                    // red green blue - format
+                    const rgb = data.split(" ");
+                    redSlider.value = parseInt(rgb[0]);
+                    greenSlider.value = parseInt(rgb[1]);
+                    blueSlider.value = parseInt(rgb[2]);
+
+                    redOutput.value = parseInt(rgb[0]);
+                    greenOutput.value = parseInt(rgb[1]);
+                    blueOutput.value = parseInt(rgb[2]);
+                });
+        }
+
+        getVideoColor();
 
         function updateBrightnessOutput() {
             const brightnessSlider = document.getElementById("brightnessSlider");

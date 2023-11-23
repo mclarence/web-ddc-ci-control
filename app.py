@@ -54,5 +54,88 @@ def set_input():
     else:
         return "ERROR", 500
 
+@app.route("/set_contrast", methods=["POST"])
+def set_contrast():
+    contrast = request.form.get("contrast")
+
+    #sanitize input
+    try:
+        if int(contrast) < 0:
+            contrast = "0"
+        elif int(contrast) > 100:
+            contrast = "100"
+    except ValueError:
+        return "Bad Request", 400
+
+    status = monitor.set_contrast(contrast)
+
+    # check if the return code is 0
+    if status == 0:
+        return "OK", 200
+    else:
+        return "ERROR", 500
+    
+@app.route("/set_volume", methods=["POST"])
+def set_volume():
+    volume = request.form.get("volume")
+
+    #sanitize input
+    try:
+        if int(volume) < 0:
+            volume = "0"
+        elif int(volume) > 100:
+            volume = "100"
+    except ValueError:
+        return "Bad Request", 400
+
+    status = monitor.set_volume(volume)
+
+    # check if the return code is 0
+    if status == 0:
+        return "OK", 200
+    else:
+        return "ERROR", 500
+    
+@app.route("/set_video_color_gain", methods=["POST"])
+def set_video_color_gain():
+    red = request.form.get("red")
+    green = request.form.get("green")
+    blue = request.form.get("blue")
+
+    #sanitize input
+    try:
+        if int(red) < 0:
+            red = "0"
+        elif int(red) > 100:
+            red = "100"
+    except ValueError:
+        return "Bad Request", 400
+
+    try:
+        if int(green) < 0:
+            green = "0"
+        elif int(green) > 100:
+            green = "100"
+    except ValueError:
+        return "Bad Request", 400
+
+    try:
+        if int(blue) < 0:
+            blue = "0"
+        elif int(blue) > 100:
+            blue = "100"
+    except ValueError:
+        return "Bad Request", 400
+
+    status = monitor.set_video_color_gain_red(red)
+    status = monitor.set_video_color_gain_green(green)
+    status = monitor.set_video_color_gain_blue(blue)
+
+    # check if the return code is 0
+    if status == 0:
+        return "OK", 200
+    else:
+        return "ERROR", 500
+
 if __name__ == "__main__":
     app.run(debug=True)

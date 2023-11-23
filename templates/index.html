@@ -10,7 +10,7 @@
             margin: 20px;
         }
 
-        h1, h2 {
+        h1, h2, h3 {
             text-align: center;
         }
 
@@ -83,6 +83,28 @@
     <input type="range" min="0" max="100" value="50" class="slider" id="brightnessSlider" oninput="updateBrightnessOutput()" onchange="setBrightness(brightnessSlider.value)">
     <output id="brightnessOutput">50</output>
 
+    <h2>Contrast</h2>
+    <!-- slider -->
+    <input type="range" min="0" max="100" value="50" class="slider" id="contrastSlider" oninput="updateContrastOutput()" onchange="setContrast(contrastSlider.value)">
+    <output id="contrastOutput">50</output>
+
+    <h2>Volume</h2>
+    <!-- slider -->
+    <input type="range" min="0" max="100" value="50" class="slider" id="volumeSlider" oninput="updateVolumeOutput()" onchange="setVolume(volumeSlider.value)">
+    <output id="volumeOutput">50</output>
+
+    <h2>Color</h2>
+    <!-- slider -->
+    <h3>Red</h3>
+    <input type="range" min="0" max="100" value="50" class="slider" id="redSlider" oninput="updateRedOutput()" onchange="setVideoColor()">
+    <output id="redOutput">50</output>
+    <h3>Green</h3>
+    <input type="range" min="0" max="100" value="50" class="slider" id="greenSlider" oninput="updateGreenOutput()" onchange="setVideoColor()">
+    <output id="greenOutput">50</output>
+    <h3>Blue</h3>
+    <input type="range" min="0" max="100" value="50" class="slider" id="blueSlider" oninput="updateBlueOutput()" onchange="setVideoColor()">
+    <output id="blueOutput">50</output>
+
     <h2>Input</h2>
     <div class="button-container">
         <button onclick="setInput('HDMI-1')">HDMI-1</button>
@@ -108,10 +130,73 @@
             });
         }
 
+        function setContrast(value) {
+            let formData = new FormData();
+            formData.append("contrast", value);
+            fetch("/set_contrast", {
+                method: "POST",
+                body: formData
+            });
+        }
+
+        function setVolume(value) {
+            let formData = new FormData();
+            formData.append("volume", value);
+            fetch("/set_volume", {
+                method: "POST",
+                body: formData
+            });
+        }
+
+        function setVideoColor(value) {
+            const redSlider = document.getElementById("redSlider");
+            const greenSlider = document.getElementById("greenSlider");
+            const blueSlider = document.getElementById("blueSlider");
+
+            let formData = new FormData();
+            formData.append("red", redSlider.value);
+            formData.append("green", greenSlider.value);
+            formData.append("blue", blueSlider.value);
+            fetch("/set_video_color_gain", {
+                method: "POST",
+                body: formData
+            });
+        }
+
         function updateBrightnessOutput() {
             const brightnessSlider = document.getElementById("brightnessSlider");
             const brightnessOutput = document.getElementById("brightnessOutput");
             brightnessOutput.value = brightnessSlider.value;
+        }
+
+        function updateContrastOutput() {
+            const contrastSlider = document.getElementById("contrastSlider");
+            const contrastOutput = document.getElementById("contrastOutput");
+            contrastOutput.value = contrastSlider.value;
+        }
+
+        function updateVolumeOutput() {
+            const volumeSlider = document.getElementById("volumeSlider");
+            const volumeOutput = document.getElementById("volumeOutput");
+            volumeOutput.value = volumeSlider.value;
+        }
+
+        function updateRedOutput() {
+            const redSlider = document.getElementById("redSlider");
+            const redOutput = document.getElementById("redOutput");
+            redOutput.value = redSlider.value;
+        }
+
+        function updateGreenOutput() {
+            const greenSlider = document.getElementById("greenSlider");
+            const greenOutput = document.getElementById("greenOutput");
+            greenOutput.value = greenSlider.value;
+        }
+
+        function updateBlueOutput() {
+            const blueSlider = document.getElementById("blueSlider");
+            const blueOutput = document.getElementById("blueOutput");
+            blueOutput.value = blueSlider.value;
         }
     </script>
 </body>

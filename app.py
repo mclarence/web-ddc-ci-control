@@ -112,7 +112,7 @@ def set_volume():
 def get_volume():
     volume = monitor.get_volume()
 
-    return volume, 200
+    return str(volume), 200
     
 @app.route("/set_video_color_gain", methods=["POST"])
 def set_video_color_gain():

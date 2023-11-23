@@ -127,9 +127,9 @@ def set_video_color_gain():
     except ValueError:
         return "Bad Request", 400
 
-    status = monitor.set_video_color_gain_red(red)
-    status = monitor.set_video_color_gain_green(green)
-    status = monitor.set_video_color_gain_blue(blue)
+    status = monitor.set_video_color_gain_red(int(red))
+    status = monitor.set_video_color_gain_green(int(green))
+    status = monitor.set_video_color_gain_blue(int(blue))
 
     # check if the return code is 0
     if status == 0:

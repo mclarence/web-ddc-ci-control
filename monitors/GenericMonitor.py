@@ -17,43 +17,43 @@ class GenericMonitor:
         return set_vcp(self.i2c_bus, self.brightness_vcp, value)
     
     def get_brightness(self):
-        return get_vcp(self.i2c_bus, self.brightness_vcp)
+        return get_vcp(self.i2c_bus, self.brightness_vcp)[3]
     
     def set_contrast(self, value: int):
         return set_vcp(self.i2c_bus, self.contrast_vcp, value)
     
     def get_contrast(self):
-        return get_vcp(self.i2c_bus, self.contrast_vcp)
+        return get_vcp(self.i2c_bus, self.contrast_vcp)[3]
     
     def set_input_source(self, value: int):
         return set_vcp(self.i2c_bus, self.input_source_vcp, value)
     
     def get_input_source(self):
-        return get_vcp(self.i2c_bus, self.input_source_vcp)
+        return get_vcp(self.i2c_bus, self.input_source_vcp)[3]
     
     def set_volume(self, value: int):
         return set_vcp(self.i2c_bus, self.volume_vcp, value)
     
     def get_volume(self):
-        return get_vcp(self.i2c_bus, self.volume_vcp)
+        return int("0" + get_vcp(self.i2c_bus, self.volume_vcp)[6], 16)
     
     def set_video_color_gain_red(self, value: int):
         return set_vcp(self.i2c_bus, self.video_gain_red_vcp, value)
     
     def get_video_color_gain_red(self):
-        return get_vcp(self.i2c_bus, self.video_gain_red_vcp)
+        return get_vcp(self.i2c_bus, self.video_gain_red_vcp)[3]
     
     def set_video_color_gain_green(self, value: int):
         return set_vcp(self.i2c_bus, self.video_gain_green_vcp, value)
     
     def get_video_color_gain_green(self):
-        return get_vcp(self.i2c_bus, self.video_gain_green_vcp)
+        return get_vcp(self.i2c_bus, self.video_gain_green_vcp)[3]
     
     def set_video_color_gain_blue(self, value: int):
         return set_vcp(self.i2c_bus, self.video_gain_blue_vcp, value)
     
     def get_video_color_gain_blue(self):
-        return get_vcp(self.i2c_bus, self.video_gain_blue_vcp)
+        return get_vcp(self.i2c_bus, self.video_gain_blue_vcp)[3]
     
     def get_monitor_name(self):
         return self.monitor_name
